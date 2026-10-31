@@ -1,0 +1,19 @@
+# CMake build output
+build/
+cmake-build-*/
+
+# Compiled binaries and object files
+*.o
+*.obj
+*.so
+*.a
+*.dll
+*.exe
+
+# IDE files
+.vscode/*
+!.vscode/c_cpp_properties.json
+.idea/
+
+# OS files
+.DS_Store
