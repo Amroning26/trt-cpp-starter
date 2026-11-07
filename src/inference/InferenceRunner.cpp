@@ -124,9 +124,7 @@ std::vector<float> InferenceRunner::infer(const cv::Mat& input) {
         cudaMemcpyAsync(output.data(), device_output_.data(), output_size_ * sizeof(float), cudaMemcpyDeviceToHost, stream_.get()),
         "cudaMemcpyAsync device to host");
 
-    checkCuda(
-        cudaStreamSynchronize(stream_.get()),
-        "cudaStreamSynchronize");
+    checkCuda(cudaStreamSynchronize(stream_.get()), "cudaStreamSynchronize");
 
     return output;
 }

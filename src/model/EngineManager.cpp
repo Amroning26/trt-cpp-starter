@@ -5,6 +5,7 @@
 
 #include <logger.h>
 #include <NvOnnxParser.h>
+#include <cuda_runtime_api.h>
 
 #include "model/EngineManager.h"
 
@@ -68,9 +69,7 @@ bool EngineManager::buildEngineFromOnnx() {
         return false;
     }
 
-    const auto explicit_batch = 1U << static_cast<uint32_t>(nvinfer1::NetworkDefinitionCreationFlag::kEXPLICIT_BATCH);
-
-    NetworkPtr network{builder->createNetworkV2(explicit_batch)};
+    NetworkPtr network{builder->createNetworkV2(0U)};
 
     if (!network) {
         return false;
@@ -92,7 +91,17 @@ bool EngineManager::buildEngineFromOnnx() {
         return false;
     }
 
-    if (builder->platformHasFastFp16()) {
+    int device = 0;
+    if (cudaGetDevice(&device) != cudaSuccess) {
+        return false;
+    }
+
+    cudaDeviceProp properties{};
+    if (cudaGetDeviceProperties(&properties, device) != cudaSuccess) {
+        return false;
+    }
+
+    if(properties.major > 5 || (properties.major == 5 && properties.minor >= 3)){
         config->setFlag(nvinfer1::BuilderFlag::kFP16);
     }
 

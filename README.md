@@ -4,13 +4,15 @@
 
 A C++ inference example for learning TensorRT, CUDA, OpenCV, and CMake.
 
+
+
 ## 环境/Requirements
 
 - C++17
-- CMake
-- CUDA
-- TensorRT
-- OpenCV
+- CMake 3.28.3
+- CUDA 12.8
+- TensorRT 10.9.0.34
+- OpenCV 4.6.0
 
 ## 编译/Build
 
