@@ -6,6 +6,10 @@ A C++ inference example for learning TensorRT, CUDA, OpenCV, and CMake.
 
 
 
+有关该代码的说明，请参考[我的博客文章](https://amroning26.github.io/model-deployment/tensorrt-cpp/)
+
+For the description of this code, please check out my [blog post](https://amroning26.github.io/model-deployment/tensorrt-cpp/).
+
 ## 环境/Requirements
 
 - C++17
